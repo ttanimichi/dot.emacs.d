@@ -138,6 +138,9 @@
 ;;; C-x 4に割り当てる
 (global-set-key (kbd "C-x 4") 'other-window-or-split)
 
+;; cua-modeの矩形選択だけを有効にする
+(cua-selection-mode t)
+
 ;; pop-win
 (require 'popwin)
 (setq display-buffer-function 'popwin:display-buffer)
