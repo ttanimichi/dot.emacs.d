@@ -110,6 +110,11 @@
  nil 'append)
 (add-to-list 'default-frame-alist '(font . "fontset-menlokakugo"))
 
+;; 行末の空白文字に色をつける
+(when (boundp 'show-trailing-whitespace)
+  (setq-default show-trailing-whitespace t))
+(set-face-background 'trailing-whitespace "DimGrey")
+
 ;; 縦3分割を行うための関数を定義
 (defun split-n (n)
   (interactive "p")
