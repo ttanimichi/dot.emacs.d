@@ -115,6 +115,15 @@
   (setq-default show-trailing-whitespace t))
 (set-face-background 'trailing-whitespace "DimGrey")
 
+;; メモをするための関数を定義
+(defun memo ()
+  (interactive)
+  (let ((path "~/Dropbox/Memo/") (name (format-time-string "%Y%m%d-%H%M-%S")))
+    (if (file-directory-p path)
+	(switch-to-buffer (find-file (concat path name ".md")))
+      (message (concat "No such directory: " path)))))
+(global-set-key (kbd "C-c m") 'memo)
+
 ;; 縦3分割を行うための関数を定義
 (defun split-n (n)
   (interactive "p")
