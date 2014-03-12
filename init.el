@@ -141,6 +141,13 @@
 ;; cua-modeの矩形選択だけを有効にする
 (cua-selection-mode t)
 
+;; 基本的には行は折り返さない
+(setq-default truncate-lines t)
+;; テキスト編集系のmodeでだけは行を折り返す
+(add-hook 'text-mode-hook (lambda () (setq truncate-lines nil)))
+(add-hook 'markdown-mode-hook (lambda () (setq truncate-lines nil)))
+(add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+
 ;; pop-win
 (require 'popwin)
 (setq display-buffer-function 'popwin:display-buffer)
