@@ -118,9 +118,9 @@
 ;; メモをするための関数を定義
 (defun memo ()
   (interactive)
-  (let ((path "~/Dropbox/Memo/") (name (format-time-string "%Y%m%d-%H%M-%S")))
+  (let ((path "~/Desktop/") (filename (format-time-string "%H.%M.%S")))
     (if (file-directory-p path)
-	(switch-to-buffer (find-file (concat path name ".md")))
+	(switch-to-buffer (find-file (concat path filename ".md")))
       (message (concat "No such directory: " path)))))
 (global-set-key (kbd "C-c m") 'memo)
 
