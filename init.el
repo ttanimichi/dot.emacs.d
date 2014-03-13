@@ -72,10 +72,7 @@
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
 ;; 半透明
-(when window-system
-  (progn
-    (setq default-frame-alist
-          (append (list '(alpha . 75)) default-frame-alist))))
+(progn (setq default-frame-alist (append (list '(alpha . 75)) default-frame-alist)))
 
 ;; history
 ;;; 記録するhistory数の最大値
@@ -271,8 +268,32 @@
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 
-;; init-ruby
-(require 'init-ruby)
+;; ruby-mode
+(require 'ruby-electric)
+(require 'ruby-block)
+;;; インデントを浅くする
+(setq ruby-deep-indent-paren-style nil)
+(add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("[Rr]akefile" . ruby-mode))
+
+;; inf-ruby
+(autoload 'run-ruby "inf-ruby" "Run an inferior Ruby process")
+(autoload 'inf-ruby-keys "inf-ruby"
+  "Set local key defs for inf-ruby in ruby-mode")
+(add-hook 'ruby-mode-hook '(lambda () (inf-ruby-keys)))
+(push '("*ruby*" :position right :width 70 :dedicated t) popwin:special-display-config)
+
+;; rcodetools
+(require 'rcodetools)
+(add-hook 'ruby-mode-hook 
+	  '(lambda () 
+	     (ruby-block-mode t)
+	     (setq ruby-block-highlight-toggle t)
+	     (ruby-electric-mode t)))
+
+;; yaml-mode
+(when (require 'yaml-mode nil t)
+  (add-to-list 'auto-mode-alist '("¥¥.yml$" . yaml-mode)))
 
 ;; js2-mode
 ;(custom-set-variables '(js2-basic-offset 2))
