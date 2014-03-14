@@ -200,6 +200,10 @@
 ;; デフォルトのコピー先を他方のバッファにする
 (setq dired-dwim-target t)
 
+;;; wdired
+(require 'wdired)
+(define-key dired-mode-map "r" 'wdired-change-to-wdired-mode)
+
 ;; direx
 ;; Warning: pop-winに依存
 (require 'direx)
