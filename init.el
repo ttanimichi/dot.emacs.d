@@ -196,6 +196,9 @@
       popwin:special-display-config)
 (push '("*VC-log*" :height 10 :position bottom) popwin:special-display-config)
 
+;; スクリプトであれば保存時に自動的にchmod a+x
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
 ;; dird
 ;; デフォルトのコピー先を他方のバッファにする
 (setq dired-dwim-target t)
