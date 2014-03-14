@@ -196,6 +196,10 @@
       popwin:special-display-config)
 (push '("*VC-log*" :height 10 :position bottom) popwin:special-display-config)
 
+;; dird
+;; デフォルトのコピー先を他方のバッファにする
+(setq dired-dwim-target t)
+
 ;; direx
 ;; Warning: pop-winに依存
 (require 'direx)
