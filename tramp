@@ -1,0 +1,32 @@
+;; -*- emacs-lisp -*- <14/03/14 22:36:17 /Users/tkr/.emacs.d/tramp>
+;; Tramp connection history.  Don't change this file.
+;; You can delete it, forcing Tramp to reapply the checks.
+
+((["scpc" nil "ssh" nil]
+  nil)
+ (["ssh" "tanimichi" "tanimichi.sakura.ne.jp" nil]
+  ("uname" "FreeBSD 9.1-RELEASE-p8")
+  ("test" "test")
+  ("remote-path"
+   ("/usr/bin" "/bin" "/usr/sbin" "/sbin" "/usr/local/bin"))
+  ("remote-shell" "/bin/sh")
+  ("busybox" nil)
+  ("~" "/home/tanimichi")
+  ("file-exists" "test -e")
+  ("perl-file-spec" t)
+  ("perl-cwd-realpath" t)
+  ("perl" "\\perl5")
+  ("stat" nil)
+  ("id" "/usr/bin/id")
+  ("gid-string" "users")
+  ("gid-integer" 1000)
+  ("ls" "/bin/ls")
+  ("uid-integer" 1244)
+  ("readlink" nil)
+  ("local-encoding" base64-encode-region)
+  ("local-decoding" base64-decode-region)
+  ("remote-encoding" tramp-perl-encode-with-module)
+  ("remote-decoding" tramp-perl-decode-with-module)
+  ("trash" nil)
+  ("inline-compress" "gzip")
+  ("inline-decompress" "gzip -d")))

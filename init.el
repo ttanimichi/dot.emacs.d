@@ -311,6 +311,12 @@
 ;; js-mode
 (add-to-list 'auto-mode-alist '("\\.js$" . js-mode))
 
+;; scss-mode
+(autoload 'scss-mode "scss-mode")
+;; 自動コンパイルしない
+(setq scss-compile-at-save nil)
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+
 ;; paredit
 ;; 対応する括弧を自動で補完するマイナーモード
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
