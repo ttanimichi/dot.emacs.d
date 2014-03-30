@@ -284,6 +284,8 @@
 (require 'ruby-block)
 ;;; インデントを浅くする
 (setq ruby-deep-indent-paren-style nil)
+;;; マジックコメントを挿入しない
+(setq ruby-insert-encoding-magic-comment nil)
 (add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
 (add-to-list 'auto-mode-alist '("[Rr]akefile" . ruby-mode))
 
