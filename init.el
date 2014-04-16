@@ -112,6 +112,9 @@
   (setq-default show-trailing-whitespace t))
 (set-face-background 'trailing-whitespace "DimGrey")
 
+;; インデントにタブを使用しない
+(setq-default indent-tabs-mode nil)
+
 ;; メモをするための関数を定義
 (defun memo ()
   (interactive)
