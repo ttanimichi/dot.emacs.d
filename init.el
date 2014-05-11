@@ -319,8 +319,12 @@
 ;; scss-mode
 (autoload 'scss-mode "scss-mode")
 ;; 自動コンパイルしない
-(setq scss-compile-at-save nil)
+(defvar scss-compile-at-save nil)
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+;; scss-modeでauto-completeを起動
+(add-to-list 'ac-modes 'scss-mode)
+;; scss-modeの辞書を指定
+(add-hook 'coffee-mode-hook '(lambda () (add-to-list 'ac-dictionary-files "~/.emacs.d/elisp/auto-complete/dict/scss-mode")))
 
 ;; paredit
 ;; 対応する括弧を自動で補完するマイナーモード
