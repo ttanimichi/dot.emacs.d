@@ -326,6 +326,9 @@
 ;; scss-modeの辞書を指定
 (add-hook 'coffee-mode-hook '(lambda () (add-to-list 'ac-dictionary-files "~/.emacs.d/elisp/auto-complete/dict/scss-mode")))
 
+;; haml-mode
+(require 'haml-mode)
+
 ;; paredit
 ;; 対応する括弧を自動で補完するマイナーモード
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
