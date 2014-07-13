@@ -15,9 +15,6 @@
 ;; スクロールバーを表示しない
 (scroll-bar-mode -1)
 
-;; カラーテーマの設定
-(load-theme 'wombat t)
-
 ;; 折り返し記号を目立たなくする
 (set-face-foreground 'fringe "#404F58")
 
@@ -70,9 +67,6 @@
 ;; 同名ファイルのバッファ名を分かりやすくする
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
-
-;; 半透明
-(progn (setq default-frame-alist (append (list '(alpha . 75)) default-frame-alist)))
 
 ;; history
 ;;; 記録するhistory数の最大値
@@ -164,6 +158,9 @@
 ;;; パッケージ名の更新は重いので普段は無効化
 ;;; (auto-install-update-emacswiki-package-name t)
 (auto-install-compatibility-setup)
+
+;; カラーテーマの設定
+(load-theme 'solarized-dark t)
 
 ;; magit
 (require 'magit)
