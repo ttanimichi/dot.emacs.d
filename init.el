@@ -6,19 +6,19 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/rhtml")
 (add-to-list 'load-path "~/.emacs.d/elisp/rcodetools")
 
-;; ツールバーを表示しない
+;; don't show tool bar
 (tool-bar-mode -1)
 
-;; メニューバーを表示しない
+;; don't show menu bar
 (menu-bar-mode -1)
 
-;; スクロールバーを表示しない
+;; don't show scroll bar
 (scroll-bar-mode -1)
 
 ;; 折り返し記号を目立たなくする
 (set-face-foreground 'fringe "#404F58")
 
-;; カーソルの位置を覚えておく
+;; remember the position of cursor
 (require 'saveplace)
 (setq-default save-place t)
 
@@ -28,13 +28,13 @@
 ;; カーソル位置の表示
 (column-number-mode 1)
 
-;; スタート画面を表示しない
+;; don't show start up screen
 (setq inhibit-startup-screen t)
 
-;; scratchバッファのメッセージを表示しない
+;; don't show scratch buffer's message
 (setq initial-scratch-message "")
 
-;; gcの頻度を下げる
+;; decrease the frequency of GC
 (setq gc-cons-threshold (* 10 gc-cons-threshold))
 
 ;; エコーエリアへのキーストークの表示を早くする
@@ -61,10 +61,10 @@
 ;; generi-x
 (require 'generic-x)
 
-;; 起動直後にホームディレクトリに移動する
+;; cd $HOME after starting up
 (cd "~/")
 
-;; 同名ファイルのバッファ名を分かりやすくする
+;; make buffer names unique
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
@@ -206,8 +206,7 @@
 (require 'wdired)
 (define-key dired-mode-map "r" 'wdired-change-to-wdired-mode)
 
-;; direx
-;; Warning: pop-winに依存
+;; direx (depends on pop-win)
 (require 'direx)
 (require 'direx-project)
 (defun direx:jump-to-project-directory ()
@@ -217,13 +216,13 @@
     (unless result
       (direx:jump-to-directory-other-window))))
 (global-set-key (kbd "C-x j") 'direx:jump-to-project-directory)
-;;; pop-winの設定
+;; pop-win setting
 (push '(direx:direx-mode :position left :width 50 :dedicated t)
       popwin:special-display-config)
 
 ;; quickrun
 (require 'quickrun)
-;;; pop-winの設定
+;; pop-win setting
 (push '("*quickrun*") popwin:special-display-config)
 (global-set-key (kbd "C-x e") 'quickrun)
 
