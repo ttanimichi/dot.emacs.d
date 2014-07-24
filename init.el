@@ -143,7 +143,7 @@
 
 ;; pop-win
 (require 'popwin)
-(setq display-buffer-function 'popwin:display-buffer)
+(popwin-mode 1)
 
 ;; ELPA
 (require 'package)
@@ -324,6 +324,15 @@
 ;; haml-mode
 (require 'haml-mode)
 
+;; nginx-mode
+(require 'nginx-mode)
+(add-hook 'conf-mode-hook (lambda () (when (string-match "nginx" (buffer-file-name)) (nginx-mode))))
+
+;; org-mode
+(require 'org-install)
+;;; 行末で折り返す
+(defvar org-startup-truncated nil)
+
 ;; paredit
 ;; 対応する括弧を自動で補完するマイナーモード
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
@@ -345,23 +354,6 @@
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'eval-expression-minibuffer-setup-hook 'rainbow-delimiters-mode)
 (add-hook 'ielm-mode-hook 'rainbow-delimiters-mode)
-
-;; org-mode
-(require 'org-install)
-;;; 行末で折り返す
-(defvar org-startup-truncated nil)
-;;; org-rememberを使う
-;;; C-c rでorg-rememberを起動
-(define-key global-map "\C-cr" 'org-remember)
-;;; org-remeberのテンプレート
-;;; TODO: ファイル名を2013とかにする。一年で１ファイル
-(defvar org-remember-templates
-      '(("Note" ?n "** %T\n\n%?\n\n %i %a" "~/Dropbox/Notes/org-remember.org")))
-(org-remember-insinuate)
-
-(require 'nginx-mode)
-(add-hook 'conf-mode-hook
-          (lambda () (when (string-match "nginx" (buffer-file-name)) (nginx-mode))))
 
 (require 'expand-region)
 (global-set-key (kbd "C-.") 'er/expand-region)
