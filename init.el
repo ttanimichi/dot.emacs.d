@@ -18,14 +18,14 @@
 ;; 折り返し記号を目立たなくする
 (set-face-foreground 'fringe "#404F58")
 
-;; remember the position of cursor
+;; remember the position of the cursor
 (require 'saveplace)
 (setq-default save-place t)
 
-;; yes/noにaliasを設定
+;; alias to yes/no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; カーソル位置の表示
+;; show cursor position
 (column-number-mode 1)
 
 ;; don't show start up screen
@@ -37,7 +37,7 @@
 ;; decrease the frequency of GC
 (setq gc-cons-threshold (* 10 gc-cons-threshold))
 
-;; エコーエリアへのキーストークの表示を早くする
+;; set keystrokes faster
 (setq echo-keystrokes 0.1)
 
 ;; 対応する括弧をハイライトする
@@ -49,13 +49,13 @@
 ;; メッセージログの最大値
 (setq message-log-max 10000)
 
-;; visible-bellを表示しない
+;; don't show visible-bell
 (setq ring-bell-function 'ignore)
 
 ;; ファイル閲覧履歴の件数
 (defvar recentf-max-saved-items 3000)
 
-;; バッファを自動で再読み込み
+;; reload buffer automatically
 (global-auto-revert-mode 1)
 
 ;; generi-x
@@ -105,10 +105,10 @@
   (setq-default show-trailing-whitespace t))
 (set-face-background 'trailing-whitespace "DimGrey")
 
-;; インデントにタブを使用しない
+;; don't use tab for indent
 (setq-default indent-tabs-mode nil)
 
-;; メモをするための関数を定義
+;; function for note
 (defun memo ()
   (interactive)
   (let ((path "~/Desktop/") (filename (format-time-string "%H.%M.%S")))
@@ -198,10 +198,6 @@
 ;; スクリプトであれば保存時に自動的にchmod a+x
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
-;; dird
-;; デフォルトのコピー先を他方のバッファにする
-(setq dired-dwim-target t)
-
 ;;; wdired
 (require 'wdired)
 (define-key dired-mode-map "r" 'wdired-change-to-wdired-mode)
@@ -289,18 +285,9 @@
 
 ;; inf-ruby
 (autoload 'run-ruby "inf-ruby" "Run an inferior Ruby process")
-(autoload 'inf-ruby-keys "inf-ruby"
-  "Set local key defs for inf-ruby in ruby-mode")
+(autoload 'inf-ruby-keys "inf-ruby" "Set local key defs for inf-ruby in ruby-mode")
 (add-hook 'ruby-mode-hook '(lambda () (inf-ruby-keys)))
 (push '("*ruby*" :position right :width 70 :dedicated t) popwin:special-display-config)
-
-;; rcodetools
-(require 'rcodetools)
-(add-hook 'ruby-mode-hook 
-	  '(lambda () 
-	     (ruby-block-mode t)
-	     (setq ruby-block-highlight-toggle t)
-	     (ruby-electric-mode t)))
 
 ;; yaml-mode
 (when (require 'yaml-mode nil t)
@@ -355,5 +342,10 @@
 (add-hook 'eval-expression-minibuffer-setup-hook 'rainbow-delimiters-mode)
 (add-hook 'ielm-mode-hook 'rainbow-delimiters-mode)
 
+;; expand-region
 (require 'expand-region)
 (global-set-key (kbd "C-.") 'er/expand-region)
+
+;; emacsclient
+(require 'server)
+(unless (server-running-p) (server-start))
