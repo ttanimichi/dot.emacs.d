@@ -1,6 +1,5 @@
 (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/elisp")
-(add-to-list 'load-path "~/.emacs.d/elisp/helm")
 (add-to-list 'load-path "~/.emacs.d/elisp/yasnippet")
 (add-to-list 'load-path "~/.emacs.d/elisp/auto-complete")
 (add-to-list 'load-path "~/.emacs.d/elisp/rhtml")
@@ -15,7 +14,7 @@
 ;; don't show scroll bar
 (scroll-bar-mode -1)
 
-;; 折り返し記号を目立たなくする
+;;  discreet fringe
 (set-face-foreground 'fringe "#404F58")
 
 ;; remember the position of the cursor
@@ -40,20 +39,20 @@
 ;; set keystrokes faster
 (setq echo-keystrokes 0.1)
 
-;; 対応する括弧をハイライトする
+;; highlight paren
 (show-paren-mode 1)
 
-;; カーソルの点滅をオフにする
+;; don't blink cursor
 (blink-cursor-mode 0)
 
-;; メッセージログの最大値
+;; max size of message log
 (setq message-log-max 10000)
 
 ;; don't show visible-bell
 (setq ring-bell-function 'ignore)
 
-;; ファイル閲覧履歴の件数
-(defvar recentf-max-saved-items 3000)
+;; max size of recentf
+(defvar recentf-max-saved-items 1000)
 
 ;; reload buffer automatically
 (global-auto-revert-mode 1)
@@ -69,14 +68,11 @@
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
 ;; history
-;;; 記録するhistory数の最大値
-(setq history-length 2000)
-;;; historyファイルの格納場所を設定
+(setq history-length 10000)
 (defvar savehist-file "~/.emacs.d/dat/history")
-;;; historyを有効化
 (savehist-mode 1)
 
-;; VC連携を無効化。gitの操作にはmagitを使う
+;; don't use vc. use magit.
 (setq vc-handled-backends ())
 
 ;; なぜかdiredがエラーを吐くので回避策
@@ -183,7 +179,7 @@
 ;; auto-save-buffers-enhanced
 (require 'auto-save-buffers-enhanced)
 ;;; しばらく入力がないと自動保存する
-(setq auto-save-buffers-enhanced-interval 5)
+(setq auto-save-buffers-enhanced-interval 1)
 (auto-save-buffers-enhanced t)
 
 ;; auto-async-byte-compile
@@ -194,9 +190,6 @@
 (push '(" *auto-async-byte-compile*" :height 14 :position bottom :noselect t)
       popwin:special-display-config)
 (push '("*VC-log*" :height 10 :position bottom) popwin:special-display-config)
-
-;; スクリプトであれば保存時に自動的にchmod a+x
-(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
 ;;; wdired
 (require 'wdired)
@@ -283,30 +276,18 @@
 (add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
 (add-to-list 'auto-mode-alist '("[Rr]akefile" . ruby-mode))
 
-;; inf-ruby
-(autoload 'run-ruby "inf-ruby" "Run an inferior Ruby process")
-(autoload 'inf-ruby-keys "inf-ruby" "Set local key defs for inf-ruby in ruby-mode")
-(add-hook 'ruby-mode-hook '(lambda () (inf-ruby-keys)))
-(push '("*ruby*" :position right :width 70 :dedicated t) popwin:special-display-config)
-
 ;; yaml-mode
 (when (require 'yaml-mode nil t)
   (add-to-list 'auto-mode-alist '("¥¥.yml$" . yaml-mode)))
 
-;; js2-mode
-;(custom-set-variables '(js2-basic-offset 2))
 ;; js-mode
 (add-to-list 'auto-mode-alist '("\\.js$" . js-mode))
 
 ;; scss-mode
 (autoload 'scss-mode "scss-mode")
-;; 自動コンパイルしない
 (defvar scss-compile-at-save nil)
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
-;; scss-modeでauto-completeを起動
 (add-to-list 'ac-modes 'scss-mode)
-;; scss-modeの辞書を指定
-(add-hook 'coffee-mode-hook '(lambda () (add-to-list 'ac-dictionary-files "~/.emacs.d/elisp/auto-complete/dict/scss-mode")))
 
 ;; haml-mode
 (require 'haml-mode)
@@ -317,13 +298,13 @@
 
 ;; org-mode
 (require 'org-install)
-;;; 行末で折り返す
+;; 行末で折り返す
 (defvar org-startup-truncated nil)
 
 ;; paredit
 ;; 対応する括弧を自動で補完するマイナーモード
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-;;; 各種Lispのモード起動時に有効化する
+;; 各種Lispのモード起動時に有効化する
 (add-hook 'lisp-mode-hook 'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
 (add-hook 'scheme-mode-hook 'enable-paredit-mode)
@@ -334,7 +315,7 @@
 ;; rainbow-delimiters
 ;; 括弧を色分けするマイナーモード
 (require 'rainbow-delimiters)
-;;; 各種Lispのモード起動時に有効化する
+;; 各種Lispのモード起動時に有効化する
 (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'lisp-interaction-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'scheme-mode-hook 'rainbow-delimiters-mode)
@@ -346,6 +327,6 @@
 (require 'expand-region)
 (global-set-key (kbd "C-.") 'er/expand-region)
 
-;; emacsclient
-(require 'server)
-(unless (server-running-p) (server-start))
+;; exec-path-from-shell
+(when (memq window-system '(mac ns)) (exec-path-from-shell-initialize))
+(defun exec-path-from-shell-initialize () ()) ;; suppress warning
