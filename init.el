@@ -330,3 +330,10 @@
 ;; exec-path-from-shell
 (when (memq window-system '(mac ns)) (exec-path-from-shell-initialize))
 (defun exec-path-from-shell-initialize () ()) ;; suppress warning
+
+;; windmove
+(windmove-default-keybindings)
+
+;; volatile-highlights
+(require 'volatile-highlights)
+(volatile-highlights-mode t)
