@@ -340,3 +340,6 @@
 
 ;; pig-mode
 (require 'pig-mode)
+
+;; anzu
+(global-anzu-mode +1)
