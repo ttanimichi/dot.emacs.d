@@ -343,3 +343,4 @@
 
 ;; anzu
 (global-anzu-mode +1)
+(defun global-anzu-mode (dummy) ()) ;; suppress warning
