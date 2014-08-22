@@ -347,7 +347,7 @@
 
 ;; sql-indent
 (eval-after-load "sql" '(load-library "sql-indent"))
-(defvar sql-indent-offset 4)
+(defvar sql-indent-offset 2)
 
 ;; helm-etags+
 (require 'helm-etags+)
