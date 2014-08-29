@@ -85,8 +85,7 @@
 
 ;; チルダの付くbackupファイルを一箇所にまとめる
 (setq backup-directory-alist
-      (cons (cons "\\.*$" (expand-file-name "~/.emacs.d/dat/backup"))
-	    backup-directory-alist))
+      (cons (cons "\\.*$" (expand-file-name "~/.emacs.d/dat/backup")) backup-directory-alist))
 
 ;; font settings
 (set-face-attribute 'default nil :family "Ricty" :height 140)
@@ -108,8 +107,7 @@
 (defun memo ()
   (interactive)
   (let ((path "~/Desktop/") (filename (format-time-string "%H.%M.%S")))
-    (if (file-directory-p path)
-	(switch-to-buffer (find-file (concat path filename ".md")))
+    (if (file-directory-p path) (switch-to-buffer (find-file (concat path filename ".md")))
       (message (concat "No such directory: " path)))))
 (global-set-key (kbd "C-c m") 'memo)
 
