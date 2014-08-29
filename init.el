@@ -353,3 +353,12 @@
 (require 'helm-etags+)
 (global-set-key "\M-." 'helm-etags+-select)
 (global-set-key "\M-," 'helm-etags+-history)
+
+;; rainbow-mode
+(require 'rainbow-mode)
+(add-hook 'css-mode-hook 'rainbow-mode)
+(add-hook 'scss-mode-hook 'rainbow-mode)
+(add-hook 'html-mode-hook 'rainbow-mode)
+(add-hook 'haml-mode-hook 'rainbow-mode)
+(add-hook 'js-mode-hook 'rainbow-mode)
+(add-hook 'coffee-mode-hook 'rainbow-mode)
