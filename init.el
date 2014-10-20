@@ -153,7 +153,7 @@
 (auto-install-compatibility-setup)
 
 ;; カラーテーマの設定
-(load-theme 'solarized-dark t)
+(load-theme 'tango-dark t)
 
 ;; magit
 (require 'magit)
